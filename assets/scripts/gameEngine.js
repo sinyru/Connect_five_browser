@@ -1,5 +1,11 @@
 'use strict';
 
+const api = require('./auth/api.js');
+const config = require('./config');
+const store = require('./store.js');
+const gameStore = require('./gameStore.js');
+const ui = require('./auth/ui.js');
+
 // Created variable for the grid
 let gridSize = 25;
 let winSize = 3;
@@ -96,6 +102,24 @@ const winConditions = function() {
   }
 };
 
+const rightAnswer = function() {
+  api.getQuestion()
+    .then((response) => {
+      gameStore.problem = response.question.problem;
+      gameStore.correct = response.question.correct;
+      gameStore.wrongOne = response.question.wrongOne;
+      gameStore.wrongTwo = response.question.wrongTwo;
+      gameStore.wrongThree = response.question.wrongThree;
+      return gameStore;
+    });
+  let answers = [gameStore.correct, gameStore.wrongOne, gameStore.wrongTwo, gameStore.wrongThree];
+  answers.sort(() => 0.5 - Math.random());
+  for (let i = 0; i < 4; i++) {
+    $(`#ans${i+1}`).text(answers[i]);
+  }
+  return answers;
+};
+
 // Reset function to reset board
 const reset = function() {
   for (let i = 0; i < gridSize; i++) {
@@ -103,22 +127,38 @@ const reset = function() {
     $('#' + i).text('');
   }
 
+
   $('.cells').on('click', (event) => {
     event.preventDefault();
+    let id = parseInt(event.target.id);
+    let textSelected = $(event.target);
+    rightAnswer();
+    $('h3').text((gameStore.problem));
     $('h2').text('');
-    if ($(event.target).text() === "") {
-      selectSpace(parseInt(event.target.id));
-      $(event.target).text(currentPlayer);
-    } else {
-      $('h2').text('Space Picked!');
-    }
+
+    $('.answers').on('click', (event) => {
+      event.preventDefault();
+      if ($(event.target).text() === gameStore.correct) {
+        if (textSelected.text() === "") {
+          selectSpace(parseInt(id));
+          textSelected.text(currentPlayer);
+          $('h2').text('Correct!');
+        }
+      } else {
+        changingTurns();
+        $('h2').text('Wrong!');
+      }
+    });
 
     if (winConditions() === true) {
-      $('h2').text(`Winner is ${currentPlayer}`);
+      $('h4').text(`Winner is ${currentPlayer}`);
       $('.cells').unbind('click');
     }
   });
 };
+
+
+
 
 
 const addHandlers = () => {

@@ -10,6 +10,7 @@ const ui = require('./auth/ui.js');
 let gridSize = 25;
 let winSize = 3;
 let board = [];
+let cellID = null;
 
 for (let i = 0; i < gridSize; i++) {
   board.push('');
@@ -20,7 +21,7 @@ for (let i = 0; i < gridSize; i++) {
 const size = Math.sqrt(board.length);
 
 // Created variable for displaying whose turn it is
-let currentPlayer = 'o';
+let currentPlayer = 'x';
 
 // Created function for switching turns between players
 const changingTurns = function() {
@@ -102,7 +103,14 @@ const winConditions = function() {
   }
 };
 
-const rightAnswer = function() {
+const shuffle = function(a) {
+  for (let i = a.length; i; i--) {
+    let j = Math.floor(Math.random() * i);
+    [a[i - 1], a[j]] = [a[j], a[i - 1]];
+  }
+};
+
+const answerSet = function() {
   api.getQuestion()
     .then((response) => {
       gameStore.problem = response.question.problem;
@@ -110,31 +118,13 @@ const rightAnswer = function() {
       gameStore.wrongOne = response.question.wrongOne;
       gameStore.wrongTwo = response.question.wrongTwo;
       gameStore.wrongThree = response.question.wrongThree;
-      return gameStore;
     });
-  let answers = [gameStore.correct, gameStore.wrongOne, gameStore.wrongTwo, gameStore.wrongThree];
-  answers.sort(() => 0.5 - Math.random());
+  let answer = [gameStore.correct, gameStore.wrongOne, gameStore.wrongTwo, gameStore.wrongThree];
+  shuffle(answer);
   for (let i = 0; i < 4; i++) {
-    $(`#ans${i+1}`).text(answers[i]);
+    $(`#ans${i}`).text(answer[i]);
   }
-  return answers;
-};
-
-const choosingAnswer = function(textSelected, id) {
-  $('.answers').on('click', (event) => {
-    event.preventDefault();
-
-    if ($(event.target).text() === gameStore.correct) {
-      if (textSelected.text() === "") {
-        selectSpace(parseInt(id));
-        textSelected.text(currentPlayer);
-        $('h2').text('Correct!');
-      }
-    } else {
-      changingTurns();
-      $('h2').text('Wrong!');
-    }
-  });
+  $('h2').text(gameStore.problem);
 };
 
 // Reset function to reset board
@@ -143,28 +133,39 @@ const reset = function() {
     board[i] = '';
     $('#' + i).text('');
   }
+};
 
-  $('.cells').on('click', (event) => {
-    event.preventDefault();
-    let id = parseInt(event.target.id);
-    let textSelected = $(event.target);
-    rightAnswer();
-    $('h3').text((gameStore.problem));
-    $('h2').text('');
-    choosingAnswer(textSelected, id);
-    if (winConditions() === true) {
-      $('#winner').text(`Winner is ${currentPlayer.toUpperCase()}`);
-      $('.cells').unbind('click');
-    }
-  });
+const onSpaceClick = function(event) {
+  event.preventDefault;
+  answerSet();
+  cellID = parseInt(event.target.id);
+  if (winConditions() === true) {
+    $('#winner').text(`Winner is ${changingTurns()}`);
+    $('.cells').unbind('click');
+    $('.ans-cells').unbind('click');
+  }
+};
+
+const onAnswerClick = function(event) {
+  event.preventDefault;
+  if ($(event.target).text() === gameStore.correct) {
+    $(`#${cellID}`).text(currentPlayer);
+    selectSpace(cellID);
+    console.log(board);
+  } else {
+    changingTurns();
+  }
+};
+
+const game = function() {
+  reset();
+  $('.cells').on('click', onSpaceClick);
+  $('.ans-cells').on('click', onAnswerClick);
 };
 
 
-
-
-
 const addHandlers = () => {
-  $('#create-game').on('click', reset);
+  $('#create-game').on('click', game);
 };
 
 module.exports = {

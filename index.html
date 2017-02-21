@@ -1,25 +1,110 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Example</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Do not add `link` tags unless you know what you are doing -->
-      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<head>
+  <title>Quiz Board</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <!-- Do not add `script` tags unless you know what you are doing -->
-      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
-      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
-    </head>
-    <body class="container-fluid">
-      <h1>Example</h1>
+  <!-- Do not add `link` tags unless you know what you are doing -->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
-    </body>
+  <!-- Do not add `script` tags unless you know what you are doing -->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+
+<body class="container-fluid">
+  <h1>Quiz Board</h1>
+
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" id="modal-sign-up">Sign-Up</button>
+
+  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <form id="sign-up">
+          <fieldset>
+            <legend>Please Fill Everything!</legend>
+            <label class="email">
+                  Email
+                  <input type="text" name="credentials[email]">
+                </label>
+
+            <label class="password">
+                  Password
+                  <input type="password" name="credentials[password]">
+                </label>
+
+            <label class="password_confirmation">
+                  Password Confirmation
+                  <input type="password" name="credentials[password_confirmation]">
+                </label>
+
+            <input type="submit" name="submit" value="Sign up!">
+          </fieldset>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <form id="sign-in">
+    <fieldset>
+      <legend>Sign in!</legend>
+      <label class="email">
+              Email
+              <input type="text" name="credentials[email]">
+            </label>
+
+      <label class="password">
+              Password
+              <input type="password" name="credentials[password]">
+            </label>
+
+      <input type="submit" name="submit" value="Sign in!" id="btn-sign-in">
+    </fieldset>
+  </form>
+
+
+
+
+  <form id="change-password">
+    <fieldset>
+      <legend>Change Password!</legend>
+      <label class="old">
+          Old password
+          <input type="password" name="passwords[old]">
+        </label>
+
+      <label class="new">
+          New password
+          <input type="password" name="passwords[new]">
+        </label>
+
+      <input type="submit" name="submit" value="Change password!">
+    </fieldset>
+  </form>
+
+
+
+
+  <form id="sign-out">
+    <fieldset>
+      <input type="submit" name="submit" value="Sign Out!" id='btn-sign-out'>
+    </fieldset>
+  </form>
+
+  <h2></h2>
+  <h3></h3>
+
+  <div class="gameboard">
+  </div>
+
+  <button class="btn btn-default" id="create-game">New Game</button>
+  <button class="btn btn-primary" id="game-history">History Log</button>
+
+
+</body>
+
 </html>

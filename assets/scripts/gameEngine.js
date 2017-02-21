@@ -120,13 +120,29 @@ const rightAnswer = function() {
   return answers;
 };
 
+const choosingAnswer = function(textSelected, id) {
+  $('.answers').on('click', (event) => {
+    event.preventDefault();
+
+    if ($(event.target).text() === gameStore.correct) {
+      if (textSelected.text() === "") {
+        selectSpace(parseInt(id));
+        textSelected.text(currentPlayer);
+        $('h2').text('Correct!');
+      }
+    } else {
+      changingTurns();
+      $('h2').text('Wrong!');
+    }
+  });
+};
+
 // Reset function to reset board
 const reset = function() {
   for (let i = 0; i < gridSize; i++) {
     board[i] = '';
     $('#' + i).text('');
   }
-
 
   $('.cells').on('click', (event) => {
     event.preventDefault();
@@ -135,23 +151,9 @@ const reset = function() {
     rightAnswer();
     $('h3').text((gameStore.problem));
     $('h2').text('');
-
-    $('.answers').on('click', (event) => {
-      event.preventDefault();
-      if ($(event.target).text() === gameStore.correct) {
-        if (textSelected.text() === "") {
-          selectSpace(parseInt(id));
-          textSelected.text(currentPlayer);
-          $('h2').text('Correct!');
-        }
-      } else {
-        changingTurns();
-        $('h2').text('Wrong!');
-      }
-    });
-
+    choosingAnswer(textSelected, id);
     if (winConditions() === true) {
-      $('h4').text(`Winner is ${currentPlayer}`);
+      $('#winner').text(`Winner is ${currentPlayer.toUpperCase()}`);
       $('.cells').unbind('click');
     }
   });

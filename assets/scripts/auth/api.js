@@ -42,7 +42,7 @@ const signOut = function() {
 
 const getQuestion = function() {
   return $.ajax({
-    url: config.apiOrigin + '/questions/' + Math.floor(Math.random()*2+1),
+    url: config.apiOrigin + '/questions/' + Math.floor(Math.random()*100+1),
     method: 'GET',
   });
 };

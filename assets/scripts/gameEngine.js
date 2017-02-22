@@ -2,12 +2,16 @@
 
 const api = require('./auth/api.js');
 const gameStore = require('./gameStore.js');
+const store = require('./store.js');
 
 // Created variable for the grid
 let gridSize = 25;
 let winSize = 3;
 let board = [];
 let cellID = null;
+let answers = [];
+let correctAnswer = '';
+let problem = '';
 
 for (let i = 0; i < gridSize; i++) {
   board.push('');
@@ -116,12 +120,14 @@ const answerSet = function() {
       gameStore.wrongTwo = response.question.wrongTwo;
       gameStore.wrongThree = response.question.wrongThree;
     });
-  let answer = [gameStore.correct, gameStore.wrongOne, gameStore.wrongTwo, gameStore.wrongThree];
-  shuffle(answer);
+  answers = [gameStore.correct, gameStore.wrongOne, gameStore.wrongTwo, gameStore.wrongThree];
+  correctAnswer = gameStore.correct;
+  problem = gameStore.problem;
+  shuffle(answers);
   for (let i = 0; i < 4; i++) {
-    $(`#ans${i}`).text(answer[i]);
+    $(`#ans${i}`).text(answers[i]);
   }
-  $('h2').text(gameStore.problem);
+  $('h2').text(problem);
 };
 
 // Reset function to reset board
@@ -134,8 +140,8 @@ const reset = function() {
 
 const onSpaceClick = function(event) {
   event.preventDefault;
-  answerSet();
   cellID = parseInt(event.target.id);
+  answerSet();
   if (winConditions() === true) {
     $('#winner').text(`Winner is ${changingTurns()}`);
     $('.cells').unbind('click');
@@ -145,10 +151,10 @@ const onSpaceClick = function(event) {
 
 const onAnswerClick = function(event) {
   event.preventDefault;
-  if ($(event.target).text() === gameStore.correct) {
+  console.log($(event.target).text());
+  if ($(event.target).text() === correctAnswer) {
     $(`#${cellID}`).text(currentPlayer);
     selectSpace(cellID);
-    console.log(board);
   } else {
     changingTurns();
   }
@@ -156,9 +162,16 @@ const onAnswerClick = function(event) {
 
 const game = function() {
   reset();
+  api.createBoard()
+    .then((response) => {
+      store.game = response.game;
+      return store;
+    });
+  console.log(store.game);
   answerSet();
-  $('.cells').on('click', onSpaceClick);
   $('.ans-cells').on('click', onAnswerClick);
+  $('.cells').on('click', onSpaceClick);
+
 };
 
 

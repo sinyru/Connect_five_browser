@@ -42,19 +42,26 @@ const signOut = function() {
 
 const getQuestion = function() {
   return $.ajax({
-    url: config.apiOrigin + '/questions/' + Math.floor(Math.random()*11+1),
+    url: config.apiOrigin + '/questions/' + Math.floor(Math.random() * 11 + 1),
     method: 'GET',
   });
 };
 
-const createBoard = function () {
+const createBoard = function() {
   return $.ajax({
-    url: config.apiOrigin + '/games',
+    url: config.apiOrigin + '/games/',
     method: "POST",
     headers: {
       Authorization: `Token token=${store.user.token}`
     },
-    data: '{"playerOneWon": false, "playerTwoWon": false, "over":false}'
+    data: {
+      game: {
+        user: store.user.id,
+        playerOneWon: false,
+        playerTwoWon: false,
+        over: false,
+      }
+    }
   });
 };
 

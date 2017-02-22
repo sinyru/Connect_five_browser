@@ -1,0 +1,9 @@
+{{#each questions as |question|}}
+
+  <div data-id="{{question.id}}">
+    <h5 class="problem">{{question.problem}}</h5>
+    <h6 class="correct">{{question.correct}}</h6>
+    <button data-id="{{question.id}}" class="remove-question">Delete</button>
+  </div>
+
+{{/each}}

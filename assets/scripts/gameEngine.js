@@ -3,6 +3,7 @@
 const api = require('./auth/api.js');
 const gameStore = require('./gameStore.js');
 const store = require('./store.js');
+const apiQuestion = require('./authQuestions/api.js');
 
 // Created variable for the grid
 let gridSize = 25;
@@ -112,7 +113,7 @@ const shuffle = function(a) {
 };
 
 const answerSet = function() {
-  api.getQuestion()
+  apiQuestion.getQuestion()
     .then((response) => {
       gameStore.problem = response.question.problem;
       gameStore.correct = response.question.correct;
@@ -139,18 +140,20 @@ const reset = function() {
 };
 
 const onSpaceClick = function(event) {
-  event.preventDefault;
+  event.preventDefault();
   cellID = parseInt(event.target.id);
   answerSet();
   if (winConditions() === true) {
     $('#winner').text(`Winner is ${changingTurns()}`);
     $('.cells').unbind('click');
     $('.ans-cells').unbind('click');
+    api.updateGame(store.id, playerOne, playerTwo, true);
   }
+
 };
 
 const onAnswerClick = function(event) {
-  event.preventDefault;
+  event.preventDefault();
   console.log($(event.target).text());
   if ($(event.target).text() === correctAnswer) {
     $(`#${cellID}`).text(currentPlayer);
@@ -161,17 +164,16 @@ const onAnswerClick = function(event) {
 };
 
 const game = function() {
+  answerSet();
   reset();
   api.createBoard()
     .then((response) => {
-      store.game = response.game;
+      store.id = response.game.id;
       return store;
     });
-  console.log(store.game);
-  answerSet();
+  console.log(store);
   $('.ans-cells').on('click', onAnswerClick);
   $('.cells').on('click', onSpaceClick);
-
 };
 
 

@@ -68,6 +68,44 @@
 
 
 
+    <form id="create-question">
+      <fieldset>
+        <legend>Create Question!</legend>
+        <label class="create-problem">
+                Problem
+                <input type="text" name="question[problem]">
+              </label>
+
+        <label class="create-correct">
+                Correct Answer
+                <input type="text" name="question[correct]">
+              </label>
+
+        <label class="create-wrong-one">
+                Wrong Answer 1
+                <input type="text" name="question[wrongOne]">
+              </label>
+
+        <label class="create-wrong-two">
+                Wrong Answer 2
+                <input type="text" name="question[wrongTwo]">
+              </label>
+
+        <label class="create-wrong-three">
+                Wrong Answer 3
+                <input type="text" name="question[wrongThree]">
+        </label>
+
+        <input type="submit" name="submit" value="Create Question!" id="btn-create-question">
+      </fieldset>
+    </form>
+
+
+  <button class="btn btn-default" id="show-questions">Show Questions</button>
+  <div class='question-index'></div>
+
+
+
 
   <form id="change-password">
     <fieldset>

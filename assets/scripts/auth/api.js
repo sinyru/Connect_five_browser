@@ -40,12 +40,6 @@ const signOut = function() {
   });
 };
 
-const getQuestion = function() {
-  return $.ajax({
-    url: config.apiOrigin + '/questions/' + Math.floor(Math.random() * 11 + 1),
-    method: 'GET',
-  });
-};
 
 const createBoard = function() {
   return $.ajax({
@@ -56,10 +50,26 @@ const createBoard = function() {
     },
     data: {
       game: {
-        user: store.user.id,
         playerOneWon: false,
         playerTwoWon: false,
         over: false,
+      }
+    }
+  });
+};
+
+const updateGame = function(id, playerOneStatus, playerTwoStatus, gameStatus) {
+  return $.ajax({
+    url: config.apiOrigin + `/games/${id}`,
+    method: "PATCH",
+    headers: {
+      Authorization: `Token token=${store.user.token}`
+    },
+    data: {
+      game: {
+        playerOneWon: playerOneStatus,
+        playerTwoWon: playerTwoStatus,
+        over: gameStatus,
       }
     }
   });
@@ -71,7 +81,6 @@ module.exports = {
   signIn,
   changePassword,
   signOut,
-  getQuestion,
   createBoard,
-
+  updateGame,
 };

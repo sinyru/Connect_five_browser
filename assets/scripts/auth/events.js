@@ -23,8 +23,8 @@ const onSignIn = function (event) {
     store.user = response.user;
     return store;
   })
-  .then(ui.success)
-  .catch(ui.failure)
+  .then(ui.successSignIn)
+  .catch(ui.failureSignIn)
   ;
 };
 

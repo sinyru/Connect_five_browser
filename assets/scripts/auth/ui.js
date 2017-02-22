@@ -1,17 +1,30 @@
 'use strict';
 
-const success = (data) => {
-  if (data) {
-    console.log(data);
-  }
+const successSignIn = () => {
+  $('#modal-sign-up').hide();
+  $('#sign-in').hide();
+  $('#change-password').show();
+  $('#sign-out').show();
+  $('.answers').show();
+  $('#create-game').show();
+  $('.gameboard').show();
 };
 
-const failure = (error) => {
-  console.error(error);
+const failureSignIn = () => {
+
 };
 
+const success = () => {
+
+};
+
+const failure = () => {
+
+};
 
 module.exports = {
   success,
   failure,
+  successSignIn,
+  failureSignIn,
 };

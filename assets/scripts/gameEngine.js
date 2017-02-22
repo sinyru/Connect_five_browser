@@ -1,10 +1,7 @@
 'use strict';
 
 const api = require('./auth/api.js');
-const config = require('./config');
-const store = require('./store.js');
 const gameStore = require('./gameStore.js');
-const ui = require('./auth/ui.js');
 
 // Created variable for the grid
 let gridSize = 25;
@@ -159,6 +156,7 @@ const onAnswerClick = function(event) {
 
 const game = function() {
   reset();
+  answerSet();
   $('.cells').on('click', onSpaceClick);
   $('.ans-cells').on('click', onAnswerClick);
 };

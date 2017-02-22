@@ -11,6 +11,12 @@ $(() => {
   auth.addHandlers();
 });
 
+$('#change-password').hide();
+$('#sign-out').hide();
+$('.answers').hide();
+$('#create-game').hide();
+$('.gameboard').hide();
+
 
 
 require('./example');

@@ -32,9 +32,19 @@ const successCreateBoard = () => {
   $('.answers').show();
 };
 
+const successCreateQuestion = () => {
+  $('#create-question-status').text("Question Created!");
+};
+
+const failureCreateQuestion = () => {
+  $('#create-question-status').text("Fail to Create New Question. Please Fill in All Blanks");
+};
+
 module.exports = {
   indexSuccess,
   deleteSuccess,
   editSuccess,
   successCreateBoard,
+  successCreateQuestion,
+  failureCreateQuestion,
 };

@@ -7,7 +7,9 @@ const ui = require('./ui.js');
 const onCreateQuestion = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
-  api.createQuestion(data);
+  api.createQuestion(data)
+    .then(ui.successCreateQuestion)
+    .catch(ui.failureCreateQuestion);
 };
 
 const onShowQuestion = function() {

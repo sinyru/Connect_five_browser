@@ -34,6 +34,7 @@ const successCreateBoard = () => {
 
 const successCreateQuestion = () => {
   $('#create-question-status').text("Question Created!");
+
 };
 
 const failureCreateQuestion = () => {

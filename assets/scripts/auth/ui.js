@@ -41,6 +41,7 @@ const successSignOut = () => {
   $('#create-question').show();
   $('#modal-sign-up').show();
   $('#change-password-status').text("Change Password!");
+  $('#winner').empty();
 };
 
 const successChangePassword = () => {

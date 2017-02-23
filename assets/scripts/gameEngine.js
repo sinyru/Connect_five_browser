@@ -11,6 +11,7 @@ let gridSize = 25;
 let winSize = 3;
 let board = [];
 let cellID = null;
+let cellStatus = '';
 let answers = [];
 let correctAnswer = '';
 let problem = '';
@@ -143,25 +144,36 @@ const reset = function() {
 const onSpaceClick = function(event) {
   event.preventDefault();
   cellID = parseInt(event.target.id);
-  answerSet();
-  if (winConditions() === true) {
-    $('#winner').text(`Winner is ${changingTurns()}`);
-    $('.cells').unbind('click');
-    $('.ans-cells').unbind('click');
-    api.updateGame(store.id, playerOne, playerTwo, true);
+  cellStatus = $(event.target).text();
+  $('.ans-cells').show();
+  if (cellStatus === ''){
+    answerSet();
+  } else {
+      $('h2').text("Pick Another Space!");
+      $('.ans-cells').hide();
   }
-
 };
 
 const onAnswerClick = function(event) {
   event.preventDefault();
-  console.log($(event.target).text());
-  if ($(event.target).text() === correctAnswer) {
-    $(`#${cellID}`).text(currentPlayer);
-    selectSpace(cellID);
-  } else {
-    changingTurns();
-  }
+    if ($(event.target).text() === correctAnswer) {
+      $(`#${cellID}`).text(currentPlayer);
+      selectSpace(cellID);
+      if (winConditions() === true) {
+        $('#winner').text(`Winner is ${changingTurns()}`);
+        $('.cells').unbind('click');
+        $('.ans-cells').unbind('click');
+        $('h2').hide();
+        $('.ans-cells').hide();
+        api.updateGame(store.id, playerOne, playerTwo, true);
+      }
+      $('.ans-cells').hide();
+      $('h2').text(`${currentPlayer}'s Turn`);
+    } else {
+      changingTurns();
+      $('h2').text(`${currentPlayer}'s Turn`);
+      $('.ans-cells').hide();
+    }
 };
 
 const game = function() {
@@ -173,9 +185,11 @@ const game = function() {
       return store;
     })
     .then(ui.successCreateBoard);
-  console.log(store);
+  $('h2').show();
+  $('#winner').empty();
   $('.ans-cells').on('click', onAnswerClick);
   $('.cells').on('click', onSpaceClick);
+
 };
 
 

@@ -14,7 +14,6 @@ const successSignIn = () => {
   $('#sign-in').hide();
   $('#change-password').show();
   $('#sign-out').show();
-  $('.answers').show();
   $('#create-game').show();
   $('.gameboard').show();
   $('#show-questions').hide();

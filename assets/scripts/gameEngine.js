@@ -155,6 +155,7 @@ const onSpaceClick = function(event) {
     $('h2').text("Pick Another Space!");
     $('.ans-cells').hide();
   }
+
 };
 
 const onAnswerClick = function(event) {

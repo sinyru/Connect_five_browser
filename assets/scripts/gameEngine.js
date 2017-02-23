@@ -14,7 +14,8 @@ let cellID = null;
 let cellStatus = '';
 let answers = [];
 let correctAnswer = '';
-let problem = '';
+let randomQuestion = '';
+let questions = [];
 
 for (let i = 0; i < gridSize; i++) {
   board.push('');
@@ -117,20 +118,22 @@ const shuffle = function(a) {
 const answerSet = function() {
   apiQuestion.getQuestion()
     .then((response) => {
-      gameStore.problem = response.question.problem;
-      gameStore.correct = response.question.correct;
-      gameStore.wrongOne = response.question.wrongOne;
-      gameStore.wrongTwo = response.question.wrongTwo;
-      gameStore.wrongThree = response.question.wrongThree;
+      questions = response.questions;
+      shuffle(questions);
+      gameStore.problem = questions[0].problem;
+      gameStore.correct = questions[0].correct;
+      gameStore.wrongOne = questions[0].wrongOne;
+      gameStore.wrongTwo = questions[0].wrongTwo;
+      gameStore.wrongThree = questions[0].wrongThree;
     });
   answers = [gameStore.correct, gameStore.wrongOne, gameStore.wrongTwo, gameStore.wrongThree];
   correctAnswer = gameStore.correct;
-  problem = gameStore.problem;
+  randomQuestion = gameStore.problem;
   shuffle(answers);
   for (let i = 0; i < 4; i++) {
     $(`#ans${i}`).text(answers[i]);
   }
-  $('h2').text(problem);
+  $('h2').text(randomQuestion);
 };
 
 // Reset function to reset board
@@ -146,34 +149,34 @@ const onSpaceClick = function(event) {
   cellID = parseInt(event.target.id);
   cellStatus = $(event.target).text();
   $('.ans-cells').show();
-  if (cellStatus === ''){
+  if (cellStatus === '') {
     answerSet();
   } else {
-      $('h2').text("Pick Another Space!");
-      $('.ans-cells').hide();
+    $('h2').text("Pick Another Space!");
+    $('.ans-cells').hide();
   }
 };
 
 const onAnswerClick = function(event) {
   event.preventDefault();
-    if ($(event.target).text() === correctAnswer) {
-      $(`#${cellID}`).text(currentPlayer);
-      selectSpace(cellID);
-      if (winConditions() === true) {
-        $('#winner').text(`Winner is ${changingTurns()}`);
-        $('.cells').unbind('click');
-        $('.ans-cells').unbind('click');
-        $('h2').hide();
-        $('.ans-cells').hide();
-        api.updateGame(store.id, playerOne, playerTwo, true);
-      }
+  if ($(event.target).text() === correctAnswer) {
+    $(`#${cellID}`).text(currentPlayer);
+    selectSpace(cellID);
+    if (winConditions() === true) {
+      $('#winner').text(`Winner is ${changingTurns()}`);
+      $('.cells').unbind('click');
+      $('.ans-cells').unbind('click');
+      $('h2').hide();
       $('.ans-cells').hide();
-      $('h2').text(`${currentPlayer}'s Turn`);
-    } else {
-      changingTurns();
-      $('h2').text(`${currentPlayer}'s Turn`);
-      $('.ans-cells').hide();
+      api.updateGame(store.id, playerOne, playerTwo, true);
     }
+    $('.ans-cells').hide();
+    $('h2').text(`${currentPlayer}'s Turn`);
+  } else {
+    changingTurns();
+    $('h2').text(`${currentPlayer}'s Turn`);
+    $('.ans-cells').hide();
+  }
 };
 
 const game = function() {

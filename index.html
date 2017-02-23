@@ -16,6 +16,7 @@
 <body class="container-fluid">
   <h1>Quiz Board</h1>
 
+  <h4 id="sign-up-status"></h4>
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" id="modal-sign-up">Sign-Up</button>
 
   <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -51,7 +52,7 @@
 
   <form id="sign-in">
     <fieldset>
-      <legend>Sign in!</legend>
+      <legend id="sign-in-status">Sign in!</legend>
       <label class="email">
               Email
               <input type="text" name="credentials[email]">
@@ -100,8 +101,12 @@
       </fieldset>
     </form>
 
-
+  <h4 id="question-status"></h4>
   <button class="btn btn-default" id="show-questions">Show Questions</button>
+  <button class="btn btn-default" id="close-questions">Close</button>
+
+
+
   <div class='question-index'></div>
 
 
@@ -109,7 +114,7 @@
 
   <form id="change-password">
     <fieldset>
-      <legend>Change Password!</legend>
+      <legend id="change-password-status">Change Password!</legend>
       <label class="old">
           Old password
           <input type="password" name="passwords[old]">

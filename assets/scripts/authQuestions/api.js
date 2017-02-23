@@ -26,15 +26,23 @@ const deleteQuestion = function(id) {
 
 const getQuestion = function() {
   return $.ajax({
-    url: config.apiOrigin + '/questions/' + Math.floor(Math.random() * 11 + 1),
+    url: config.apiOrigin + '/questions/' + Math.floor(Math.random() * 20 + 1),
     method: 'GET',
   });
 };
 
+const editAnswer = function(id, data) {
+  return $.ajax({
+    url: config.apiOrigin + '/questions/' + id,
+    method: 'PATCH',
+    data
+  });
+};
 
 module.exports = {
   createQuestion,
   showQuestions,
   deleteQuestion,
-  getQuestion
+  getQuestion,
+  editAnswer,
 };

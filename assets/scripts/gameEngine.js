@@ -4,6 +4,7 @@ const api = require('./auth/api.js');
 const gameStore = require('./gameStore.js');
 const store = require('./store.js');
 const apiQuestion = require('./authQuestions/api.js');
+const ui = require('./authQuestions/ui.js');
 
 // Created variable for the grid
 let gridSize = 25;
@@ -170,7 +171,8 @@ const game = function() {
     .then((response) => {
       store.id = response.game.id;
       return store;
-    });
+    })
+    .then(ui.successCreateBoard);
   console.log(store);
   $('.ans-cells').on('click', onAnswerClick);
   $('.cells').on('click', onSpaceClick);

@@ -10,8 +10,8 @@ const onSignUp = function (event) {
   event.preventDefault();
   let data = getFormFields(event.target);
   api.signUp(data)
-  .then(ui.success)
-  .catch(ui.failure)
+  .then(ui.successSignUp)
+  .catch(ui.failureSignUp)
   ;
 };
 
@@ -32,8 +32,8 @@ const onChangePassword = function (event) {
   event.preventDefault();
   let data = getFormFields(event.target);
   api.changePassword(data)
-  .then(ui.success)
-  .catch(ui.failure)
+  .then(ui.successChangePassword)
+  .catch(ui.failureChangePassword)
   ;
 };
 
@@ -44,7 +44,7 @@ const onSignOut = function (event) {
     delete store.user;
     return store;
   })
-  .then(ui.success)
+  .then(ui.successSignOut)
   .catch(ui.failure)
   ;
 };

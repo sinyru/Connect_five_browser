@@ -18,16 +18,23 @@ const onShowQuestion = function() {
 const onDeleteQuestion = function(event) {
   event.preventDefault();
   let id = event.target.dataset.id;
-  console.log(id);
   api.deleteQuestion(id)
-  .then(ui.deleteSuccess);
+    .then(ui.deleteSuccess);
 };
 
+const onEditAnswer = function(event) {
+  event.preventDefault();
+  let id = event.target.dataset.id;
+  let answer = getFormFields(event.target);
+  api.editAnswer(id, answer)
+    .then(ui.editSuccess);
+};
 
 const addHandlers = () => {
   $('#create-question').on('submit', onCreateQuestion);
   $('#show-questions').on('click', onShowQuestion);
   $('.question-index').on('click', '.remove-question', onDeleteQuestion);
+  $('.question-index').on('submit', '.edit-question', onEditAnswer);
 };
 
 module.exports = {

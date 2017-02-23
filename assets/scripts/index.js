@@ -18,7 +18,14 @@ $('#sign-out').hide();
 $('.answers').hide();
 $('#create-game').hide();
 $('.gameboard').hide();
+$('#close-questions').hide();
 
 
+$('#close-questions').on('click', ()=>{
+  $('#show-questions').show();
+  $('.question-index').empty();
+  $('#close-questions').hide();
+  $('#question-status').empty();
+});
 
 require('./example');

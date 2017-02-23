@@ -20,6 +20,7 @@ const successSignIn = () => {
   $('#create-question').hide();
   $('.question-index').empty();
   $('#sign-up-status').empty();
+  $('#question-status').empty();
 };
 
 const failureSignIn = () => {

@@ -1,11 +1,15 @@
 'use strict';
 
 const config = require('../config');
+const store = require('../store.js');
 
 const createQuestion = function(data) {
   return $.ajax({
     url: config.apiOrigin + '/questions/',
     method: "POST",
+    headers: {
+      Authorization: `Token token=${store.user.token}`
+    },
     data
   });
 };
@@ -17,10 +21,21 @@ const showQuestions = function() {
   });
 };
 
+const showUserQuestions = function() {
+  return $.ajax({
+    url: config.apiOrigin + '/questions/',
+    method: 'GET',
+  });
+};
+
+
 const deleteQuestion = function(id) {
   return $.ajax({
     url: config.apiOrigin + '/questions/' + id,
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      Authorization: `Token token=${store.user.token}`
+    },
   });
 };
 
@@ -35,6 +50,9 @@ const editAnswer = function(id, data) {
   return $.ajax({
     url: config.apiOrigin + '/questions/' + id,
     method: 'PATCH',
+    headers: {
+      Authorization: `Token token=${store.user.token}`
+    },
     data
   });
 };
@@ -45,4 +63,5 @@ module.exports = {
   deleteQuestion,
   getQuestion,
   editAnswer,
+  showUserQuestions,
 };

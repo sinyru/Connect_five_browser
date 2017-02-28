@@ -1,13 +1,8 @@
 {{#each questions as |question|}}
 
   <div data-id="{{question.id}}">
-    <h5 class="problem">{{question.problem}}</h5>
+    <h5 class="problem">Problem: {{question.problem}}</h5>
     <h6 class="correct">Answer: {{question.correct}}</h6>
-    <button data-id="{{question.id}}" class="remove-question">Delete</button>
-      <form class="edit-question" data-id="{{question.id}}">
-          <input type="text" name="question[correct]">
-          <input type="submit" value="Change Answer">
-      </form>
   </div>
 
 {{/each}}

@@ -1,29 +1,60 @@
 'use strict';
 
 const indexQuestionsTemplate = require('../templates/indexQuestion.handlebars');
+const gameStore = require('../gameStore.js');
+const store = require('../store.js');
+
 
 const indexSuccess = function(data) {
   let index = indexQuestionsTemplate({
     questions: data.questions
   });
+
   $('.question-index').empty().append(index);
   $('#close-questions').show();
   $('#show-questions').hide();
   $('#question-status').text("Please see below for Questions:");
+  $('#show-user-questions').hide();
+};
+
+const showUserQuestionsSuccess = function() {
+  let size = gameStore.user.questions.length;
+  let count = 0;
+  for (let i = 0; i < size; i++) {
+
+    if (gameStore.user.questions[i].user_id === store.user.id) {
+      $('.question-index').append("Problem: " + gameStore.user.questions[i].problem + `
+                                    <button data-id=${gameStore.user.questions[i].id}
+                                    class="remove-question">Delete</button>` + "<br>");
+      $('.question-index').append("Correct: " + gameStore.user.questions[i].correct + `
+                                    <form class="edit-question" data-id=${gameStore.user.questions[i].id}>
+                                    <input type="text" name="question[correct]">
+                                    <input type="submit" value="Change Answer">
+                                    </form>` + "<br>");
+    count = count + 1;
+    }
+    if (count===0){
+      $('h2').text("You have no questions in database.");
+    } else{
+      $('h2').empty();
+    }
+    $('#show-user-questions').hide();
+    $('#close-user-questions').show();
+    $('#show-questions').hide();
+  }
+
 };
 
 const deleteSuccess = function() {
   $('.question-index').empty();
   $('#close-questions').hide();
-  $('#show-questions').show();
-  $('#question-status').text("Question has been deleted, please click button to check database.");
+  $('#question-status').text("Question Deleted.");
 };
 
 const editSuccess = function() {
   $('.question-index').empty();
   $('#close-questions').hide();
-  $('#show-questions').show();
-  $('#question-status').text("Answer has been edited, please click button to check database.");
+  $('#question-status').text("Correct Answer Edited.");
 };
 
 const successCreateBoard = () => {
@@ -33,12 +64,12 @@ const successCreateBoard = () => {
 };
 
 const successCreateQuestion = () => {
-  $('#create-question-status').text("Question Created!");
+  $('#create-question-status').text("Question Created Successfully!");
 
 };
 
 const failureCreateQuestion = () => {
-  $('#create-question-status').text("Fail to Create New Question. Please Fill in All Blanks");
+  $('#create-question-status').text("Failed! Please Fill in All Blanks");
 };
 
 module.exports = {
@@ -48,4 +79,5 @@ module.exports = {
   successCreateBoard,
   successCreateQuestion,
   failureCreateQuestion,
+  showUserQuestionsSuccess,
 };

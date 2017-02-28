@@ -3,6 +3,8 @@
 const api = require('./api.js');
 const getFormFields = require(`../../../lib/get-form-fields`);
 const ui = require('./ui.js');
+const store = require('../store.js');
+const gameStore = require('../gameStore.js');
 
 const onCreateQuestion = function(event) {
   event.preventDefault();
@@ -20,6 +22,7 @@ const onShowQuestion = function() {
 const onDeleteQuestion = function(event) {
   event.preventDefault();
   let id = event.target.dataset.id;
+  console.log(id)
   api.deleteQuestion(id)
     .then(ui.deleteSuccess);
 };
@@ -32,11 +35,21 @@ const onEditAnswer = function(event) {
     .then(ui.editSuccess);
 };
 
+const onShowUserQuestions = function() {
+  api.showUserQuestions()
+    .then((response) => {
+      gameStore.user = response;
+      return gameStore;
+    })
+    .then(ui.showUserQuestionsSuccess);
+};
+
 const addHandlers = () => {
   $('#create-question').on('submit', onCreateQuestion);
   $('#show-questions').on('click', onShowQuestion);
   $('.question-index').on('click', '.remove-question', onDeleteQuestion);
   $('.question-index').on('submit', '.edit-question', onEditAnswer);
+  $('#show-user-questions').on('click', onShowUserQuestions);
 };
 
 module.exports = {

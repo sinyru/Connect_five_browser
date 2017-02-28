@@ -116,6 +116,7 @@ const shuffle = function(a) {
 };
 
 const answerSet = function() {
+  $('.ans-cells').hide();
   apiQuestion.getQuestion()
     .then((response) => {
       questions = response.questions;
@@ -142,15 +143,19 @@ const reset = function() {
     board[i] = '';
     $('#' + i).text('');
   }
+  currentPlayer = 'x';
 };
 
 const onSpaceClick = function(event) {
+
   event.preventDefault();
   cellID = parseInt(event.target.id);
   cellStatus = $(event.target).text();
-  $('.ans-cells').show();
+
   if (cellStatus === '') {
     answerSet();
+    $('.ans-cells').show();
+    $('.cells').unbind('click');
   } else {
     $('h2').text("Pick Another Space!");
     $('.ans-cells').hide();
@@ -164,7 +169,7 @@ const onAnswerClick = function(event) {
     $(`#${cellID}`).text(currentPlayer);
     selectSpace(cellID);
     if (winConditions() === true) {
-      $('#winner').text(`Winner is ${changingTurns()}`);
+      $('#winner').text(`Winner is ${changingTurns().toUpperCase()}`);
       $('.cells').unbind('click');
       $('.ans-cells').unbind('click');
       $('h2').hide();
@@ -172,17 +177,23 @@ const onAnswerClick = function(event) {
       api.updateGame(store.id, playerOne, playerTwo, true);
     }
     $('.ans-cells').hide();
-    $('h2').text(`${currentPlayer}'s Turn`);
+    $('h2').text(`Correct!, ${currentPlayer.toUpperCase()}'s Turn Now`);
   } else {
     changingTurns();
-    $('h2').text(`${currentPlayer}'s Turn`);
+    $('h2').text(`Wrong! The Correct Answer is ${gameStore.correct}, ${currentPlayer.toUpperCase()}'s Turn`);
+
     $('.ans-cells').hide();
   }
+  $('.cells').on('click', onSpaceClick);
 };
 
 const game = function() {
-  answerSet();
+  $('#show-questions').hide();
+  $('#show-user-questions').hide();
+
   reset();
+  answerSet();
+
   api.createBoard()
     .then((response) => {
       store.id = response.game.id;
@@ -191,8 +202,9 @@ const game = function() {
     .then(ui.successCreateBoard);
   $('h2').show();
   $('#winner').empty();
-  $('.ans-cells').on('click', onAnswerClick);
   $('.cells').on('click', onSpaceClick);
+  $('.ans-cells').on('click', onAnswerClick);
+
 
 };
 

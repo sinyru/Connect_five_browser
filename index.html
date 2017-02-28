@@ -16,118 +16,152 @@
 <body class="container-fluid">
   <h1>Quiz Board</h1>
 
-  <h4 id="sign-up-status"></h4>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" id="modal-sign-up">Sign-Up</button>
 
-  <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <form id="sign-up">
-          <fieldset>
-            <legend>Please Fill Everything!</legend>
-            <label class="email">
-                  Email
-                  <input type="text" name="credentials[email]">
-                </label>
+  <div class="btn-group sign-in-up btn-sign-up">
+    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sign-Up <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
 
-            <label class="password">
-                  Password
-                  <input type="password" name="credentials[password]">
-                </label>
+      <form id="sign-up">
+        <fieldset class="sign-up-fieldset">
+          <legend id="sign-up-status">Please Fill in All Blanks</legend>
+          <label class="email">
+                Email:
+                <input type="text" name="credentials[email]">
+              </label>
 
-            <label class="password_confirmation">
-                  Password Confirmation
-                  <input type="password" name="credentials[password_confirmation]">
-                </label>
+          <label class="password">
+                Password:
+                <input type="password" name="credentials[password]">
+              </label>
 
-            <input type="submit" name="submit" value="Sign up!">
-          </fieldset>
-        </form>
+          <label class="password_confirmation">
+                Password Confirmation:
+                <input type="password" name="credentials[password_confirmation]">
+              </label>
 
-      </div>
-    </div>
+          <input type="submit" name="submit" value="Sign up!">
+        </fieldset>
+      </form>
+
+    </ul>
   </div>
 
 
 
-  <form id="sign-in">
-    <fieldset>
-      <legend id="sign-in-status">Sign in!</legend>
-      <label class="email">
-              Email
-              <input type="text" name="credentials[email]">
+
+  <div class="btn-group sign-in-up btn-sign-in">
+    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sign-In <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+
+      <form id="sign-in">
+        <fieldset class="sign-in-fieldset">
+          <legend id="sign-in-status">Please Fill in All Blanks</legend>
+          <label class="email">
+                  Email:
+                  <input type="text" name="credentials[email]">
+                </label>
+
+          <label class="password">
+                  Password:
+                  <input type="password" name="credentials[password]">
+                </label>
+
+          <input type="submit" name="submit" value="Sign in!" id="btn-sign-in">
+        </fieldset>
+      </form>
+
+    </ul>
+  </div>
+
+
+  <div class="btn-group btn-change-password">
+    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Change Password <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+
+      <form id="change-password">
+        <fieldset class="change-password-fieldset">
+          <legend id="change-password-status">Please Fill in All Blanks</legend>
+          <label class="old">
+              Old password
+              <input type="password" name="passwords[old]">
             </label>
 
-      <label class="password">
-              Password
-              <input type="password" name="credentials[password]">
+          <label class="new">
+              New password
+              <input type="password" name="passwords[new]">
             </label>
 
-      <input type="submit" name="submit" value="Sign in!" id="btn-sign-in">
-    </fieldset>
-  </form>
+          <input type="submit" name="submit" value="Change password!">
+        </fieldset>
+
+      </form>
+    </ul>
+  </div>
+
+
+  <div class="btn-group btn-create-question">
+    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Create Question! <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+
+      <form id="create-question">
+        <fieldset class="create-question-fieldset">
+          <legend id="create-question-status">Please Fill in All Blanks</legend>
+          <label class="create-problem">
+                  Problem
+                  <input type="text" class="create-answers" name="question[problem]">
+                </label>
+
+          <label class="create-correct">
+                  Correct Answer
+                  <input type="text" class="create-answers" name="question[correct]">
+                </label>
+
+          <label class="create-wrong-one">
+                  Wrong Answer 1
+                  <input type="text" class="create-answers" name="question[wrongOne]">
+                </label>
+
+          <label class="create-wrong-two">
+                  Wrong Answer 2
+                  <input type="text" class="create-answers" name="question[wrongTwo]">
+                </label>
+
+          <label class="create-wrong-three">
+                  Wrong Answer 3
+                  <input type="text" class="create-answers" name="question[wrongThree]">
+          </label>
+
+          <input type="submit" name="submit" value="Create Question!" id="btn-create-question">
+        </fieldset>
+      </form>
+
+    </ul>
+  </div>
 
 
 
-    <form id="create-question">
-      <fieldset>
-        <legend id="create-question-status">Create Question!</legend>
-        <label class="create-problem">
-                Problem
-                <input type="text" class="create-answers" name="question[problem]">
-              </label>
 
-        <label class="create-correct">
-                Correct Answer
-                <input type="text" class="create-answers" name="question[correct]">
-              </label>
-
-        <label class="create-wrong-one">
-                Wrong Answer 1
-                <input type="text" class="create-answers" name="question[wrongOne]">
-              </label>
-
-        <label class="create-wrong-two">
-                Wrong Answer 2
-                <input type="text" class="create-answers" name="question[wrongTwo]">
-              </label>
-
-        <label class="create-wrong-three">
-                Wrong Answer 3
-                <input type="text" class="create-answers" name="question[wrongThree]">
-        </label>
-
-        <input type="submit" name="submit" value="Create Question!" id="btn-create-question">
-      </fieldset>
-    </form>
 
   <h4 id="question-status"></h4>
-  <button class="btn btn-default" id="show-questions">Show Questions</button>
+  <button class="btn btn-default" id="show-questions">Show All Questions</button>
   <button class="btn btn-default" id="close-questions">Close</button>
-
-
+  <button class="btn btn-default" id="show-user-questions">Show User Questions</button>
+  <button class="btn btn-default" id="close-user-questions">Close</button>
 
   <div class='question-index'></div>
 
 
 
 
-  <form id="change-password">
-    <fieldset>
-      <legend id="change-password-status">Change Password!</legend>
-      <label class="old">
-          Old password
-          <input type="password" name="passwords[old]">
-        </label>
 
-      <label class="new">
-          New password
-          <input type="password" name="passwords[new]">
-        </label>
-
-      <input type="submit" name="submit" value="Change password!">
-    </fieldset>
-  </form>
 
 
 
@@ -165,8 +199,9 @@
   <div class="gameboard">
   </div>
 
+<div class="btn-create-game">
   <button class="btn btn-default" id="create-game">New Game</button>
-
+</div>
 
 
 

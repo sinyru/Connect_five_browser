@@ -175,7 +175,6 @@ const onAnswerClick = function(event) {
       $('h2').hide();
       $('.ans-cells').hide();
       api.updateGame(store.id, playerTwo, playerOne, true);
-      console.log(store.game);
     }
     $('.ans-cells').hide();
     $('h2').text(`Correct!, ${currentPlayer.toUpperCase()}'s Turn Now`);

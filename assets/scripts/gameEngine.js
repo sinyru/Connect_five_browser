@@ -180,7 +180,7 @@ const onAnswerClick = function(event) {
     $('h2').text(`Correct!, ${currentPlayer.toUpperCase()}'s Turn Now`);
   } else {
     changingTurns();
-    $('h2').text(`Wrong! The Correct Answer is ${gameStore.correct}, ${currentPlayer.toUpperCase()}'s Turn`);
+    $('h2').text(`Wrong! ${currentPlayer.toUpperCase()}'s Turn`);
 
     $('.ans-cells').hide();
   }

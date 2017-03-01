@@ -25,12 +25,15 @@ $('#show-user-questions').hide();
 $('#close-user-questions').hide();
 
 
+
+
 $('#close-questions').on('click', ()=>{
   $('#show-questions').show();
   $('.question-index').empty();
   $('#close-questions').hide();
   $('#question-status').empty();
   $('#show-user-questions').show();
+  $('#create-game').show();
 });
 
 $('#close-user-questions').on('click', ()=>{
@@ -40,7 +43,9 @@ $('#close-user-questions').on('click', ()=>{
   $('#question-status').empty();
   $('#show-questions').show();
   $('h2').empty();
+  $('#create-game').show();
 });
+
 
 $('.btn-create-question').on('click', ()=>{
   $('#create-question-status').text("Please Fill in All Blanks.");

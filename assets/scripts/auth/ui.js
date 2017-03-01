@@ -27,6 +27,7 @@ const successSignIn = () => {
   $('#create-question').show();
   $('#show-user-questions').show();
   $('#sign-in-status').empty();
+  $('#end-game').show();
 };
 
 const failureSignIn = () => {
@@ -56,6 +57,7 @@ const successSignOut = () => {
   $('#winner').empty();
   $('.question-index').empty();
   $('#question-status').empty();
+  $('#end-game').hide();
 };
 
 const successChangePassword = () => {

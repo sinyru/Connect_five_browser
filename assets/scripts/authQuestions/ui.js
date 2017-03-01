@@ -15,6 +15,7 @@ const indexSuccess = function(data) {
   $('#show-questions').hide();
   $('#question-status').text("Please see below for Questions:");
   $('#show-user-questions').hide();
+  $('#create-game').hide();
 };
 
 const showUserQuestionsSuccess = function() {
@@ -39,7 +40,7 @@ const showUserQuestionsSuccess = function() {
   $('#show-user-questions').hide();
   $('#close-user-questions').show();
   $('#show-questions').hide();
-
+  $('#create-game').hide();
 };
 
 const deleteSuccess = function() {

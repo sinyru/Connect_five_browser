@@ -174,7 +174,8 @@ const onAnswerClick = function(event) {
       $('.ans-cells').unbind('click');
       $('h2').hide();
       $('.ans-cells').hide();
-      api.updateGame(store.id, playerOne, playerTwo, true);
+      api.updateGame(store.id, playerTwo, playerOne, true);
+      console.log(store.game);
     }
     $('.ans-cells').hide();
     $('h2').text(`Correct!, ${currentPlayer.toUpperCase()}'s Turn Now`);
@@ -198,6 +199,7 @@ const game = function() {
   api.createBoard()
     .then((response) => {
       store.id = response.game.id;
+      store.game = response.game;
       return store;
     })
     .then(ui.successCreateBoard);

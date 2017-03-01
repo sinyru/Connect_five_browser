@@ -63,11 +63,12 @@ const successCreateBoard = () => {
 
 const successCreateQuestion = () => {
   $('#create-question-status').text("Question Created Successfully!");
-
+  $("input[type=text]").val("");
 };
 
 const failureCreateQuestion = () => {
   $('#create-question-status').text("Failed! Please Fill in All Blanks");
+  $("input[type=text]").val("");
 };
 
 module.exports = {

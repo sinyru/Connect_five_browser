@@ -4,11 +4,13 @@ const successSignUp = () => {
   $('#modal-sign-up').hide();
   $('#sign-up-status').text("Sign-Up Successful!");
   $('#sign-in-status').empty();
+  $("input[type=text], input[type=password]").val("");
 };
 
 const failureSignUp = () => {
   $('#sign-up-status').text("Sign-Up Fail! Please try again!");
   $('#sign-in-status').empty();
+  $("input[type=text], input[type=password]").val("");
 };
 
 const successSignIn = () => {
@@ -28,6 +30,7 @@ const successSignIn = () => {
   $('#show-user-questions').show();
   $('#sign-in-status').empty();
   $('#end-game').show();
+  $("input[type=text], input[type=password]").val("");
 };
 
 const failureSignIn = () => {
@@ -62,10 +65,12 @@ const successSignOut = () => {
 
 const successChangePassword = () => {
   $('#change-password-status').text("Change Password Successfully!");
+  $("input[type=password]").val("");
 };
 
 const failureChangePassword = () => {
   $('#change-password-status').text("Failed! Please try again!");
+  $("input[type=password]").val("");
 };
 
 const success = () => {

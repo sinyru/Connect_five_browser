@@ -193,6 +193,7 @@ const game = function() {
 
   reset();
   answerSet();
+  currentPlayer = 'x';
 
   api.createBoard()
     .then((response) => {

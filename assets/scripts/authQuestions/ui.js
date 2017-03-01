@@ -21,7 +21,6 @@ const showUserQuestionsSuccess = function() {
   let size = gameStore.user.questions.length;
   let count = 0;
   for (let i = 0; i < size; i++) {
-
     if (gameStore.user.questions[i].user_id === store.user.id) {
       $('.question-index').append("Problem: " + gameStore.user.questions[i].problem + `
                                     <button data-id=${gameStore.user.questions[i].id}
@@ -31,17 +30,15 @@ const showUserQuestionsSuccess = function() {
                                     <input type="text" name="question[correct]">
                                     <input type="submit" value="Change Answer">
                                     </form>` + "<br>");
-    count = count + 1;
+      count++;
     }
-    if (count===0){
-      $('h2').text("You have no questions in database.");
-    } else{
-      $('h2').empty();
-    }
-    $('#show-user-questions').hide();
-    $('#close-user-questions').show();
-    $('#show-questions').hide();
   }
+  if (count === 0)
+    $('h2').text("You have no Questions in database");
+
+  $('#show-user-questions').hide();
+  $('#close-user-questions').show();
+  $('#show-questions').hide();
 
 };
 

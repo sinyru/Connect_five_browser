@@ -56,6 +56,7 @@ const editSuccess = function() {
 };
 
 const successCreateBoard = () => {
+  $('h2').show();
   $('h2').empty();
   $('.ans-cells').text("");
   $('.answers').show();

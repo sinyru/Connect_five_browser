@@ -31,6 +31,7 @@ const successSignIn = () => {
   $('#sign-in-status').empty();
   $('#end-game').show();
   $("input[type=text], input[type=password]").val("");
+  $('h2').hide();
 };
 
 const failureSignIn = () => {

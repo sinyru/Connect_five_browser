@@ -36,6 +36,7 @@ const successSignIn = () => {
 const failureSignIn = () => {
   $('#sign-in-status').text("Email and Password does not Match! Please try again");
   $('#sign-up-status').empty();
+  $("input[type=text], input[type=password]").val("");
 };
 
 const successSignOut = () => {

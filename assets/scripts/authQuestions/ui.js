@@ -34,8 +34,11 @@ const showUserQuestionsSuccess = function() {
       count++;
     }
   }
-  if (count === 0)
+  console.log(count);
+  if (count === 0){
+    $('h2').show();
     $('h2').text("You have no Questions in database");
+  }
 
   $('#show-user-questions').hide();
   $('#close-user-questions').show();

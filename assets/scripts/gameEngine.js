@@ -144,6 +144,7 @@ const reset = function() {
     board[i] = '';
     $('#' + i).text('');
   }
+  $('h2').text('Game Start! Player X, please pick a spot to begin.');
   currentPlayer='x';
   playerOne=false;
   playerTwo=false;

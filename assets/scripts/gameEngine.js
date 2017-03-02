@@ -199,6 +199,8 @@ const game = function(event) {
   $('.ans-cells').off('click');
   $('#show-questions').hide();
   $('#show-user-questions').hide();
+  $('.btn-change-password').hide();
+  $('.btn-create-question').hide();
 
   reset();
 

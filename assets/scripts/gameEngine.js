@@ -155,7 +155,7 @@ const onSpaceClick = function(event) {
   event.preventDefault();
   cellID = parseInt(event.target.id);
   cellStatus = $(event.target).text();
-  $('h2').text(gameStore.problem);
+  $('h2').text('Question: ' + gameStore.problem);
 
   if (cellStatus === '') {
     answerSet();

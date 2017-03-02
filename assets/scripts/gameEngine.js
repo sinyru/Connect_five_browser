@@ -41,7 +41,7 @@ const changingTurns = function() {
 // Created function for selecting spaces within the grid
 const selectSpace = function(i) {
   if (board[i] === '') {
-    board[i] = changingTurns();
+    board[i] = currentPlayer;
   }
 };
 
@@ -130,6 +130,7 @@ const answerSet = function() {
   answers = [gameStore.correct, gameStore.wrongOne, gameStore.wrongTwo, gameStore.wrongThree];
   correctAnswer = gameStore.correct;
   randomQuestion = gameStore.problem;
+
   shuffle(answers);
   for (let i = 0; i < 4; i++) {
     $(`#ans${i}`).text(answers[i]);
@@ -143,7 +144,9 @@ const reset = function() {
     board[i] = '';
     $('#' + i).text('');
   }
-  currentPlayer = 'x';
+  currentPlayer='x';
+  playerOne=false;
+  playerTwo=false;
 };
 
 const onSpaceClick = function(event) {
@@ -151,10 +154,12 @@ const onSpaceClick = function(event) {
   event.preventDefault();
   cellID = parseInt(event.target.id);
   cellStatus = $(event.target).text();
-  $('h2').text(randomQuestion);
+  $('h2').text(gameStore.problem);
+
   if (cellStatus === '') {
     answerSet();
-    $('.ans-cells').show();
+    if (winConditions() === false){
+      $('.ans-cells').show();}
     $('.cells').unbind('click');
   } else {
     $('h2').text("Pick Another Space!");
@@ -169,18 +174,20 @@ const onAnswerClick = function(event) {
     $(`#${cellID}`).text(currentPlayer);
     selectSpace(cellID);
     if (winConditions() === true) {
-      $('#winner').text(`Winner is ${changingTurns().toUpperCase()}`);
+      $('#winner').text(`Winner is ${currentPlayer.toUpperCase()}`);
       $('.cells').unbind('click');
       $('.ans-cells').unbind('click');
       $('h2').hide();
       $('.ans-cells').hide();
-      api.updateGame(store.id, playerTwo, playerOne, true);
+      api.updateGame(store.id, playerOne, playerTwo, true);
     }
-    $('.ans-cells').hide();
-    $('h2').text(`Correct!, ${changingTurns().toUpperCase()}'s Turn Now`);
-  } else {
     changingTurns();
-    $('h2').text(`Wrong! ${changingTurns().toUpperCase()}'s Turn`);
+    $('h2').text(`Correct!, ${currentPlayer.toUpperCase()}'s Turn Now`);
+    $('.ans-cells').hide();
+  } else {
+    $('h2').text(`Wrong! ${currentPlayer.toUpperCase()}'s Turn`);
+    changingTurns();
+
 
     $('.ans-cells').hide();
   }
@@ -189,26 +196,26 @@ const onAnswerClick = function(event) {
 
 const game = function(event) {
   event.preventDefault();
+  $('.cells').off('click');
+  $('.ans-cells').off('click');
   $('#show-questions').hide();
   $('#show-user-questions').hide();
 
   reset();
-  answerSet();
 
+  answerSet();
 
   api.createBoard()
     .then((response) => {
       store.id = response.game.id;
-      store.game = response.game;
       return store;
     })
     .then(ui.successCreateBoard);
   $('h2').show();
   $('#winner').empty();
+
   $('.cells').on('click', onSpaceClick);
   $('.ans-cells').on('click', onAnswerClick);
-
-
 };
 
 

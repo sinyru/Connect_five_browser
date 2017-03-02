@@ -186,10 +186,8 @@ const onAnswerClick = function(event) {
     $('h2').text(`Correct!, ${currentPlayer.toUpperCase()}'s Turn Now`);
     $('.ans-cells').hide();
   } else {
-    $('h2').text(`Wrong! ${currentPlayer.toUpperCase()}'s Turn`);
     changingTurns();
-
-
+    $('h2').text(`Wrong! ${currentPlayer.toUpperCase()}'s Turn`);
     $('.ans-cells').hide();
   }
   $('.cells').on('click', onSpaceClick);

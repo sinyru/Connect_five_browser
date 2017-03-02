@@ -34,6 +34,7 @@ const successSignIn = () => {
   $('h2').show();
   $('h2').text('To Begin the Game, Please click New Game.');
 
+
 };
 
 const failureSignIn = () => {
@@ -66,6 +67,7 @@ const successSignOut = () => {
   $('#question-status').empty();
   $('#end-game').hide();
   $('.cells').off('click');
+  $('#close-game').hide();
 };
 
 const successChangePassword = () => {

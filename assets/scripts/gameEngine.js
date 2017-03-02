@@ -201,9 +201,9 @@ const game = function(event) {
   $('#show-user-questions').hide();
   $('.btn-change-password').hide();
   $('.btn-create-question').hide();
+  $('#close-game').show();
 
   reset();
-
   answerSet();
 
   api.createBoard()

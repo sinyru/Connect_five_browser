@@ -23,8 +23,22 @@ $('#show-questions').hide();
 $('.btn-create-question').hide();
 $('#show-user-questions').hide();
 $('#close-user-questions').hide();
+$('#close-game').hide();
 
-
+$('#close-game').on('click', ()=>{
+  $('#show-user-questions').show();
+  $('#close-user-questions').hide();
+  $('#show-questions').show();
+  $('.btn-change-password').show();
+  $('.btn-create-question').show();
+  $('#close-game').hide();
+  $('.cells').off('click');
+  $('.answers').hide();
+  $('h2').show();
+  $('h2').text('To Begin the Game, Please click New Game.');
+  $('.cells').empty();
+  $('#winner').empty();
+});
 
 $('#close-questions').on('click', ()=>{
   $('#show-questions').show();

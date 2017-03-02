@@ -26,7 +26,6 @@ $('#close-user-questions').hide();
 
 
 
-
 $('#close-questions').on('click', ()=>{
   $('#show-questions').show();
   $('.question-index').empty();
@@ -34,6 +33,7 @@ $('#close-questions').on('click', ()=>{
   $('#question-status').empty();
   $('#show-user-questions').show();
   $('#create-game').show();
+  $('h2').text('To Begin the Game, Please click New Game.');
 });
 
 $('#close-user-questions').on('click', ()=>{
@@ -42,7 +42,7 @@ $('#close-user-questions').on('click', ()=>{
   $('#close-user-questions').hide();
   $('#question-status').empty();
   $('#show-questions').show();
-  $('h2').empty();
+  $('h2').text('To Begin the Game, Please click New Game.');
   $('#create-game').show();
 });
 

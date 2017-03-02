@@ -16,6 +16,7 @@ const indexSuccess = function(data) {
   $('#question-status').text("Please see below for Questions:");
   $('#show-user-questions').hide();
   $('#create-game').hide();
+  $('h2').empty();
 };
 
 const showUserQuestionsSuccess = function() {
@@ -36,8 +37,9 @@ const showUserQuestionsSuccess = function() {
   }
   console.log(count);
   if (count === 0){
-    $('h2').show();
     $('h2').text("You have no Questions in database");
+  } else {
+    $('h2').empty();
   }
 
   $('#show-user-questions').hide();

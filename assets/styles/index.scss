@@ -12,7 +12,7 @@ body {
 }
 
 .gameboard div {
-  border: 1px solid black;
+  border: 2px solid black;
   float: left;
   font-size: 70px;
   height: 80px;
@@ -27,6 +27,14 @@ body {
 
 .answers {
   width: 50%;
+}
+
+.ans-cells {
+  margin-bottom: 4px;
+  background: white;
+  width: 300px;
+  border-radius: 20px;
+  border: 2px solid blue;
 }
 
 #winner {

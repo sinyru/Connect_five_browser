@@ -9,9 +9,12 @@ const gameStore = require('../gameStore.js');
 const onCreateQuestion = function(event) {
   event.preventDefault();
   let data = getFormFields(event.target);
+
+
   api.createQuestion(data)
     .then(ui.successCreateQuestion)
     .catch(ui.failureCreateQuestion);
+
 };
 
 const onShowQuestion = function() {
@@ -22,7 +25,6 @@ const onShowQuestion = function() {
 const onDeleteQuestion = function(event) {
   event.preventDefault();
   let id = event.target.dataset.id;
-  console.log(id)
   api.deleteQuestion(id)
     .then(ui.deleteSuccess);
 };

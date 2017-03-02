@@ -134,7 +134,7 @@ const answerSet = function() {
   for (let i = 0; i < 4; i++) {
     $(`#ans${i}`).text(answers[i]);
   }
-  $('h2').text(randomQuestion);
+
 };
 
 // Reset function to reset board
@@ -151,7 +151,7 @@ const onSpaceClick = function(event) {
   event.preventDefault();
   cellID = parseInt(event.target.id);
   cellStatus = $(event.target).text();
-
+  $('h2').text(randomQuestion);
   if (cellStatus === '') {
     answerSet();
     $('.ans-cells').show();
@@ -177,23 +177,24 @@ const onAnswerClick = function(event) {
       api.updateGame(store.id, playerTwo, playerOne, true);
     }
     $('.ans-cells').hide();
-    $('h2').text(`Correct!, ${currentPlayer.toUpperCase()}'s Turn Now`);
+    $('h2').text(`Correct!, ${changingTurns().toUpperCase()}'s Turn Now`);
   } else {
     changingTurns();
-    $('h2').text(`Wrong! ${currentPlayer.toUpperCase()}'s Turn`);
+    $('h2').text(`Wrong! ${changingTurns().toUpperCase()}'s Turn`);
 
     $('.ans-cells').hide();
   }
   $('.cells').on('click', onSpaceClick);
 };
 
-const game = function() {
+const game = function(event) {
+  event.preventDefault();
   $('#show-questions').hide();
   $('#show-user-questions').hide();
 
   reset();
   answerSet();
-  currentPlayer = 'x';
+
 
   api.createBoard()
     .then((response) => {

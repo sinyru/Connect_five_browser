@@ -33,8 +33,12 @@ const onEditAnswer = function(event) {
   event.preventDefault();
   let id = event.target.dataset.id;
   let answer = getFormFields(event.target);
-  api.editAnswer(id, answer)
-    .then(ui.editSuccess);
+  if (answer.question.correct === ""){
+    $('#question-status').text("Invalid Answer");
+  } else {
+    api.editAnswer(id, answer)
+      .then(ui.editSuccess);
+  }
 };
 
 const onShowUserQuestions = function() {

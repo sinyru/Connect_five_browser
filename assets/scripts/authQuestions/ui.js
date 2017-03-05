@@ -35,7 +35,6 @@ const showUserQuestionsSuccess = function() {
       count++;
     }
   }
-  console.log(count);
   if (count === 0){
     $('h2').text("You have no Questions in database");
   } else {

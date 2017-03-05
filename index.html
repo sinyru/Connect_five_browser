@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Quiz Board</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Do not add `link` tags unless you know what you are doing -->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Do not add `script` tags unless you know what you are doing -->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+
+<body class="container-fluid">
+  <h1>Quiz Board</h1>
+
+
+  <div class="btn-group sign-in-up btn-sign-up">
+    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sign-Up <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+
+      <form id="sign-up">
+        <fieldset class="sign-up-fieldset">
+          <legend id="sign-up-status">Please Fill in All Blanks</legend>
+          <label class="email">
+                Email:
+                <input type="text" name="credentials[email]">
+              </label>
+
+          <label class="password">
+                Password:
+                <input type="password" name="credentials[password]">
+              </label>
+
+          <label class="password_confirmation">
+                Password Confirmation:
+                <input type="password" name="credentials[password_confirmation]">
+              </label>
+
+          <input type="submit" name="submit" value="Sign up!">
+        </fieldset>
+      </form>
+
+    </ul>
+  </div>
+
+
+
+
+  <div class="btn-group sign-in-up btn-sign-in">
+    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sign-In <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+
+      <form id="sign-in">
+        <fieldset class="sign-in-fieldset">
+          <legend id="sign-in-status">Please Fill in All Blanks</legend>
+          <label class="email">
+                  Email:
+                  <input type="text" name="credentials[email]">
+                </label>
+
+          <label class="password">
+                  Password:
+                  <input type="password" name="credentials[password]">
+                </label>
+
+          <input type="submit" name="submit" value="Sign in!" id="btn-sign-in">
+        </fieldset>
+      </form>
+
+    </ul>
+  </div>
+
+
+  <div class="btn-group btn-change-password">
+    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Change Password <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+
+      <form id="change-password">
+        <fieldset class="change-password-fieldset">
+          <legend id="change-password-status">Please Fill in All Blanks</legend>
+          <label class="old">
+              Old password
+              <input type="password" name="passwords[old]">
+            </label>
+
+          <label class="new">
+              New password
+              <input type="password" name="passwords[new]">
+            </label>
+
+          <input type="submit" name="submit" value="Change password!">
+        </fieldset>
+
+      </form>
+    </ul>
+  </div>
+
+
+  <div class="btn-group btn-create-question">
+    <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Create Question! <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+
+      <form id="create-question">
+        <fieldset class="create-question-fieldset">
+          <legend id="create-question-status">Please Fill in All Blanks</legend>
+          <label class="create-problem">
+                  Problem
+                  <input type="text" class="create-answers" name="question[problem]">
+                </label>
+
+          <label class="create-correct">
+                  Correct Answer
+                  <input type="text" class="create-answers" name="question[correct]">
+                </label>
+
+          <label class="create-wrong-one">
+                  Wrong Answer 1
+                  <input type="text" class="create-answers" name="question[wrongOne]">
+                </label>
+
+          <label class="create-wrong-two">
+                  Wrong Answer 2
+                  <input type="text" class="create-answers" name="question[wrongTwo]">
+                </label>
+
+          <label class="create-wrong-three">
+                  Wrong Answer 3
+                  <input type="text" class="create-answers" name="question[wrongThree]">
+          </label>
+
+          <input type="submit" name="submit" value="Create Question!" id="btn-create-question">
+        </fieldset>
+      </form>
+
+    </ul>
+  </div>
+
+
+
+
+
+  <h4 id="question-status"></h4>
+  <button class="btn btn-default" id="show-questions">Show All Questions</button>
+  <button class="btn btn-default" id="close-questions">Close</button>
+  <button class="btn btn-default" id="show-user-questions">Your Questions</button>
+  <button class="btn btn-default" id="close-user-questions">Close</button>
+
+  <div class='question-index'></div>
+
+
+
+
+
+
+
+
+
+  <form id="sign-out">
+    <fieldset>
+      <input type="submit" name="submit" value="Sign Out!" id='btn-sign-out'>
+    </fieldset>
+  </form>
+
+  <div id="winner"></div>
+  <h2></h2>
+
+
+  <h3></h3>
+  <div class="answers">
+
+        <button class="ans-cells" id="ans0"></button>
+
+        <button class="ans-cells" id="ans1"></button>
+
+        <button class="ans-cells" id='ans2'></button>
+
+        <button class="ans-cells" id='ans3'></button>
+
+  </div>
+
+
+
+  <div class="gameboard">
+  </div>
+
+
+  <button class="btn btn-default" id="create-game">New Game</button>
+  <button class="btn btn-default" id="close-game">End Game and Settings</button>
+
+
+
+
+</body>
+
+</html>
